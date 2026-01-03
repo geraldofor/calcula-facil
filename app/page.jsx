@@ -1,52 +1,86 @@
-import Link from 'next/link';
+'use client';
 
-export default function Home() {
+import Card from './components/Card';
+
+export default function SistemaPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-6">
-          Sistema Completo de <span className="text-blue-600">Reservas e Cálculos</span>
-        </h1>
-        <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
-          Automatize sua gestão de reservas, cálculos financeiros e pagamentos com uma plataforma tudo-em-um.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <Link 
-            href="/app" 
-            className="px-8 py-4 bg-blue-600 text-white rounded-xl text-lg font-semibold hover:bg-blue-700 transition shadow-lg"
+    <div>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">
+        Sistema de Cálculos
+      </h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Card Tarifas */}
+        <Card>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <span className="text-blue-600">💰</span>
+            </div>
+            <h2 className="text-lg font-semibold">Tarifas</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Cálculo de tarifas aéreas com taxas, RAV e FEE.
+          </p>
+          <a 
+            href="/sistema/tarifas" 
+            className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
           >
-            Começar Agora Gratuitamente
-          </Link>
-          <Link 
-            href="/admin" 
-            className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-xl text-lg font-semibold hover:bg-blue-50 transition"
-          >
-            Acessar Painel Admin
-          </Link>
-        </div>
+            Acessar
+          </a>
+        </Card>
 
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            { title: 'Dashboard Admin', desc: 'Controle completo de usuários e métricas', icon: '📊', link: '/admin' },
-            { title: 'Sistema Operacional', desc: 'Cadastro de reservas e cálculos', icon: '⚙️', link: '/app' },
-            { title: 'Área do Cliente', desc: 'Autoatendimento para seus clientes', icon: '👤', link: '/cliente' },
-          ].map((feature) => (
-            <Link 
-              key={feature.title}
-              href={feature.link}
-              className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition cursor-pointer"
-            >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.desc}</p>
-              <div className="mt-4 text-blue-600 font-semibold">Acessar →</div>
-            </Link>
-          ))}
-        </div>
+        {/* Card Conversor */}
+        <Card>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-green-100 rounded-lg">
+              <span className="text-green-600">🔄</span>
+            </div>
+            <h2 className="text-lg font-semibold">Conversor</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Decodificação de itinerários aéreos.
+          </p>
+          <a 
+            href="/sistema/conversor" 
+            className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition"
+          >
+            Acessar
+          </a>
+        </Card>
+
+        {/* Card Reemissão */}
+        <Card>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <span className="text-purple-600">✈️</span>
+            </div>
+            <h2 className="text-lg font-semibold">Reemissão</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Cálculo de reemissão Amadeus e outros GDS.
+          </p>
+          <a 
+            href="/sistema/reemissao" 
+            className="inline-block bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition"
+          >
+            Acessar
+          </a>
+        </Card>
       </div>
+
+      {/* Status */}
+      <Card className="mt-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-semibold text-gray-700">Status do Sistema</h3>
+            <p className="text-sm text-gray-500">Todos os módulos operacionais</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+            <span className="text-green-600 font-medium">Online</span>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }
