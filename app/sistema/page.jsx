@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ShieldAlert } from 'lucide-react';
+import { Calculator, Shield } from 'lucide-react';
 
 export default function SistemaPage() {
   const router = useRouter();
@@ -10,7 +10,6 @@ export default function SistemaPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar se usuário está logado
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
     
@@ -21,82 +20,80 @@ export default function SistemaPage() {
     
     setUser(JSON.parse(userData));
     setLoading(false);
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Verificando acesso...</p>
+          <p className="mt-4 text-gray-600">Carregando...</p>
         </div>
       </div>
     );
   }
 
-  if (!user) {
-    return null;
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Protegido */}
+      {/* Header */}
       <div className="bg-white shadow border-b">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Calculadora de Remarcação</h1>
-            <p className="text-gray-600">
-              Olá, <span className="font-semibold">{user.name}</span> • Plano: {user.plan}
-            </p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-              ✓ Acesso Ativo
+          <div className="flex items-center">
+            <Shield className="w-6 h-6 text-green-600 mr-3" />
+            <div>
+              <h1 className="text-xl font-bold text-gray-900">Calculadora de Remarcação</h1>
+              <p className="text-sm text-gray-600">Bem-vindo, {user?.name}</p>
             </div>
-            <button
-              onClick={() => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                router.push('/login');
-              }}
-              className="px-4 py-2 text-gray-600 hover:text-gray-900"
-            >
-              Sair
-            </button>
           </div>
+          <button
+            onClick={() => {
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              router.push('/login');
+            }}
+            className="px-4 py-2 text-red-600 hover:text-red-800"
+          >
+            Sair
+          </button>
         </div>
       </div>
 
-      {/* Área da Calculadora */}
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="bg-white rounded-xl shadow p-8">
-          <div className="flex items-center mb-6">
-            <ShieldAlert className="w-6 h-6 text-green-600 mr-3" />
-            <h2 className="text-xl font-semibold">Área Protegida</h2>
-          </div>
-          
-          <div className="p-6 border-2 border-dashed border-gray-300 rounded-lg text-center">
-            <p className="text-lg mb-4">🎉 <strong>Parabéns!</strong> Você tem acesso à área premium.</p>
-            <p className="text-gray-600 mb-6">
-              Aqui será carregada a <strong>Calculadora de Remarcação Aérea</strong> completa.
+      {/* Conteúdo */}
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="text-center mb-8">
+            <Calculator className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Calculadora de Remarcação Aérea
+            </h2>
+            <p className="text-gray-600">
+              Área protegida - Em breve sua calculadora será integrada aqui
             </p>
-            
-            <div className="max-w-2xl mx-auto bg-gray-100 p-6 rounded-lg">
-              <h3 className="font-bold mb-4">Próximos passos:</h3>
-              <ol className="text-left list-decimal pl-5 space-y-2 text-gray-700">
-                <li>Integrar seu código HTML/JS da calculadora aqui</li>
-                <li>Conectar com banco de dados para salvar cálculos</li>
-                <li>Implementar sistema real de pagamentos</li>
-                <li>Adicionar histórico de cálculos por usuário</li>
-              </ol>
+          </div>
+
+          <div className="border-2 border-dashed border-gray-300 rounded-xl p-8">
+            <div className="text-center">
+              <h3 className="text-lg font-semibold mb-4">🚀 Em Desenvolvimento</h3>
+              <p className="text-gray-600 mb-6">
+                Sua calculadora HTML/JS será carregada nesta área em breve.
+              </p>
+              
+              <div className="bg-gray-100 rounded-lg p-6 max-w-md mx-auto text-left mb-6">
+                <h4 className="font-bold mb-2">Para testar agora:</h4>
+                <ol className="list-decimal pl-5 space-y-1 text-gray-700">
+                  <li>O sistema de login está funcionando</li>
+                  <li>Área protegida está ativa</li>
+                  <li>Dashboard admin está acessível</li>
+                </ol>
+              </div>
+
+              <button
+                onClick={() => alert('Calculadora em desenvolvimento!')}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Testar Versão Demo
+              </button>
             </div>
-            
-            <button
-              onClick={() => alert('Em breve: calculadora funcional!')}
-              className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Testar Calculadora (Em Breve)
-            </button>
           </div>
         </div>
       </div>
