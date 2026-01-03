@@ -8,11 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "14.0.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "lucide-react": "^0.309.0"
-  },
+  "react": "18.2.0",
+  "react-dom": "18.2.0",
+  "next": "14.0.4",
+  // ... outros que já tem ...
+  "react-icons": "^4.12.0"  // ← ADICIONE ESTA LINHA
+},
   "devDependencies": {
     "autoprefixer": "10.4.16",
     "postcss": "8.4.32",
